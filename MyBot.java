@@ -1,30 +1,21 @@
-import java.util.List;
-
-import twitter4j.Status;
+//class is set up to search for hashtag verseoftheday and retweet the first one found.
+//can alter it to find multiple hashtags or retweet multiple tweets. 
 import twitter4j.*;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.Query;
-import twitter4j.QueryResult;
-//right now class is set up to search for hashtag verseoftheday and retweet the first one found.
+
+
 public class MyBot{
 
-	//if something goes wrong, we might see a TwitterException
+	//if something goes wrong,  might see a TwitterException
 	public static void main(String...args) throws TwitterException, InterruptedException{
 
 		//access the Twitter API using your twitter4j.properties file
 		Twitter twitter = TwitterFactory.getSingleton();
 
-		//send a tweet
-		//Status status = twitter.updateStatus("Hello World");
 
-		//print a message so we can know when it is finishes
-		//System.out.println("Done.");
 		//runs forever
 		while(true){
 		//create a new seartch 
-		Query query = new Query("\"#verseoftheday\"");
+		Query query = new Query("\"#verseoftheday\" || #");
 
 		//get the results from search
 		QueryResult result = twitter.search(query);
@@ -41,6 +32,9 @@ public class MyBot{
 		//go to sleep for 24 hours
 		Thread.sleep(24*60*60*1000);
 		}
+
+
+
 		/*itierate over every search result
 		for(Status tweet: result.getTweets()){
 			//print out tweet
@@ -53,10 +47,16 @@ public class MyBot{
 			+ " nice");
 		statusUpdate.inReplyToStatusId(tweetResult.getId());
 		Status status = twitter.updateStatus(statusUpdate);*/
+
+		//send a tweet
+		//Status status = twitter.updateStatus("Hello World");
+
+		//print a message so we can know when it is finishes
+		//System.out.println("Done.");
 	}
 }
 
-// compiles coede
+// compiles code from command line
 // javac -cp twitter4j-core-4.0.4.jar MyBot.java
-//runs code 
+//runs code from command line
 // java -cp "twitter4j-core-4.0.4.jar;." MyBot
